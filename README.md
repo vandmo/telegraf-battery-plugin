@@ -1,0 +1,1 @@
+# telegraf-battery-plugin
