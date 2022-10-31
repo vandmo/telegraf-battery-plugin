@@ -38,6 +38,12 @@ func appendMaybe(list *[]string, name string, value string) {
 	}
 }
 
+func appendQuotedMaybe(list *[]string, name string, value string) {
+	if value != "" {
+		*list = append(*list, fmt.Sprintf("%s=\"%s\"", name, value))
+	}
+}
+
 func printBattery(things map[string]string) {
 	idx := strings.Replace(things["BAT_NAME"], "BAT", "", 1)
 
@@ -56,8 +62,8 @@ func printBattery(things map[string]string) {
 	appendMaybe(&fields, "energy_full", things["POWER_SUPPLY_ENERGY_FULL"])
 	appendMaybe(&fields, "energy_now", things["POWER_SUPPLY_ENERGY_NOW"])
 	appendMaybe(&fields, "capacity", things["POWER_SUPPLY_CAPACITY"])
-	appendMaybe(&fields, "battery_status", things["POWER_SUPPLY_STATUS"])
-	appendMaybe(&fields, "capacity_level", things["POWER_SUPPLY_CAPACITY_LEVEL"])
+	appendQuotedMaybe(&fields, "battery_status", things["POWER_SUPPLY_STATUS"])
+	appendQuotedMaybe(&fields, "capacity_level", things["POWER_SUPPLY_CAPACITY_LEVEL"])
 	fmt.Printf("%s\n", strings.Join(fields, ","))
 	return
 }
