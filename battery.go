@@ -32,10 +32,10 @@ func batteryThings(battery string) (map[string]string, bool) {
 	return things, false
 }
 
-func printMaybe(name string, value string) {
-    if value != "" {
-    	fmt.Printf("%s=%s,", name, value)
-    }
+func appendMaybe(list *[]string, name string, value string) {
+	if value != "" {
+		*list = append(*list, fmt.Sprintf("%s=%s", name, value))
+	}
 }
 
 func printBattery(things map[string]string) {
@@ -44,19 +44,21 @@ func printBattery(things map[string]string) {
 	// tags
 	fmt.Printf("battery_linux,battery=%s,idx=%s ", things["BAT_NAME"], idx)
 
+    var fields []string
+    
 	// values
-	printMaybe("present", things["POWER_SUPPLY_PRESENT"])
-	printMaybe("cycle_count", things["POWER_SUPPLY_CYCLE_COUNT"])
-	printMaybe("voltage_min_design", things["POWER_SUPPLY_VOLTAGE_MIN_DESIGN"])
-	printMaybe("voltage_now", things["POWER_SUPPLY_VOLTAGE_NOW"])
-	printMaybe("power_now", things["POWER_SUPPLY_POWER_NOW"])
-	printMaybe("energy_full_design", things["POWER_SUPPLY_ENERGY_FULL_DESIGN"])
-	printMaybe("energy_full", things["POWER_SUPPLY_ENERGY_FULL"])
-	printMaybe("energy_now", things["POWER_SUPPLY_ENERGY_NOW"])
-	printMaybe("capacity", things["POWER_SUPPLY_CAPACITY"])
-	printMaybe("battery_status", things["POWER_SUPPLY_STATUS"])
-	printMaybe("capacity_level", things["POWER_SUPPLY_CAPACITY_LEVEL"])
-	fmt.Printf("\n")
+	appendMaybe(&fields, "present", things["POWER_SUPPLY_PRESENT"])
+	appendMaybe(&fields, "cycle_count", things["POWER_SUPPLY_CYCLE_COUNT"])
+	appendMaybe(&fields, "voltage_min_design", things["POWER_SUPPLY_VOLTAGE_MIN_DESIGN"])
+	appendMaybe(&fields, "voltage_now", things["POWER_SUPPLY_VOLTAGE_NOW"])
+	appendMaybe(&fields, "power_now", things["POWER_SUPPLY_POWER_NOW"])
+	appendMaybe(&fields, "energy_full_design", things["POWER_SUPPLY_ENERGY_FULL_DESIGN"])
+	appendMaybe(&fields, "energy_full", things["POWER_SUPPLY_ENERGY_FULL"])
+	appendMaybe(&fields, "energy_now", things["POWER_SUPPLY_ENERGY_NOW"])
+	appendMaybe(&fields, "capacity", things["POWER_SUPPLY_CAPACITY"])
+	appendMaybe(&fields, "battery_status", things["POWER_SUPPLY_STATUS"])
+	appendMaybe(&fields, "capacity_level", things["POWER_SUPPLY_CAPACITY_LEVEL"])
+	fmt.Printf("%s\n", strings.Join(fields, ","))
 	return
 }
 
