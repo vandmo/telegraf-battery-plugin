@@ -48,15 +48,15 @@ func printBattery(things map[string]string) {
 	printMaybe("present", things["POWER_SUPPLY_PRESENT"])
 	printMaybe("cycle_count", things["POWER_SUPPLY_CYCLE_COUNT"])
 	printMaybe("voltage_min_design", things["POWER_SUPPLY_VOLTAGE_MIN_DESIGN"])
-    printMaybe("voltage_now", things["POWER_SUPPLY_VOLTAGE_NOW"])
-    printMaybe("power_now", things["POWER_SUPPLY_POWER_NOW"])
-    printMaybe("energy_full_design", things["POWER_SUPPLY_ENERGY_FULL_DESIGN"])
+	printMaybe("voltage_now", things["POWER_SUPPLY_VOLTAGE_NOW"])
+	printMaybe("power_now", things["POWER_SUPPLY_POWER_NOW"])
+	printMaybe("energy_full_design", things["POWER_SUPPLY_ENERGY_FULL_DESIGN"])
 	printMaybe("energy_full", things["POWER_SUPPLY_ENERGY_FULL"])
 	printMaybe("energy_now", things["POWER_SUPPLY_ENERGY_NOW"])
 	printMaybe("capacity", things["POWER_SUPPLY_CAPACITY"])
 	printMaybe("battery_status", things["POWER_SUPPLY_STATUS"])
 	printMaybe("capacity_level", things["POWER_SUPPLY_CAPACITY_LEVEL"])
-    fmt.Printf("\n")
+	fmt.Printf("\n")
 	return
 }
 
